@@ -1,0 +1,1 @@
+Implementation of the Hangman game in Java for the second OOP assignment 
