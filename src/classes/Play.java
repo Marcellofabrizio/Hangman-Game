@@ -10,6 +10,8 @@ public class Play {
     private List<String> guessedLetters;
     public Words pickedWord;
 
+    public Word hiddenWord = this.pickedWord.pickWord();
+
     public Play() {
         this.foundLetters = new ArrayList<>();
         this.wrongLetters = new ArrayList<>();
@@ -17,8 +19,6 @@ public class Play {
     }
 
     public void playHangman() {
-
-        Word hiddenWord = this.pickedWord.pickWord();
 
         for (int i = 0 ; i < hiddenWord.getWordLenght() ; i++) {
 
@@ -44,6 +44,114 @@ public class Play {
             }
 
         }
+
+        drawHangman();
+    }
+
+    private boolean checkLetter(String letter) {
+
+        for(int i = 0 ; i < this.hiddenWord.getWordLenght() ; i++) {
+            String splitterLetter = this.hiddenWord.getContent().substring(i, 1).toUpperCase();
+            if(splitterLetter.equals(letter.trim().toUpperCase()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void drawHangman() {
+        this.wrongLetters = new ArrayList<>();
+        for (String item : guessedLetters) 
+        {
+            if(!checkLetter(item))
+            {
+                this.wrongLetters.add(item);
+            }
+        }
+
+        System.out.println(" ");
+        if(this.wrongLetters.size() == 1) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 2) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |     |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 3) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |     |");
+            System.out.println("  |    \\|");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 4) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |     |");
+            System.out.println("  |    \\|/");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 5) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |     |");
+            System.out.println("  |    \\|/");
+            System.out.println("  |     |");
+            System.out.println("  |");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 6) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |     |");
+            System.out.println("  |    \\|/");
+            System.out.println("  |     |");
+            System.out.println("  |    /");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 7) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |     O");
+            System.out.println("  |     |");
+            System.out.println("  |    \\|/");
+            System.out.println("  |     |");
+            System.out.println("  |    / \\");
+            System.out.println("__|__");
+        }
+
+        else System.out.println(" ");
+
+        System.out.println(" ");
+        
 
     }
 
