@@ -25,7 +25,7 @@ public class Word {
         return wordLenght;
     }
 
-    public void setWordLenght(int wordLenght) {
-        this.wordLenght = wordLenght;
+    public void setWordLenght() {
+        this.wordLenght = this.content.length();
     }
 }
