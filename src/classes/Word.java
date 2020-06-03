@@ -22,10 +22,7 @@ public class Word {
     }
 
     public int getWordLenght() {
-        return wordLenght;
-    }
-
-    public void setWordLenght() {
         this.wordLenght = this.content.length();
+        return this.wordLenght;
     }
 }

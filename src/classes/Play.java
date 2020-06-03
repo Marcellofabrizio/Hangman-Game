@@ -1,16 +1,16 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Play {
-    
-    private List<String> foundLetters;
-    private List<String> wrongLetters;
-    private List<String> guessedLetters;
-    public Words pickedWord;
 
-    public Word hiddenWord = this.pickedWord.pickWord();
+    private List<String> foundLetters;
+    private List<Character> wrongLetters;
+    private List<Character> guessedLetters;
+    public Words pickedWord = new Words();
+    public Word hiddenWord = new Word();
 
     public Play() {
         this.foundLetters = new ArrayList<>();
@@ -20,23 +20,22 @@ public class Play {
 
     public void playHangman() {
 
-        for (int i = 0 ; i < hiddenWord.getWordLenght() ; i++) {
+        for (int i = 0; i < hiddenWord.getWordLenght(); i++) {
 
             this.foundLetters.add(" _ ");
-
         }
 
-        for (int i = 0 ; i < hiddenWord.getWordLenght() ; i++) {
+        for (int i = 0; i < (hiddenWord.getWordLenght() - 1); i++) {
 
-            String letter = hiddenWord.getContent().substring(i, 1);
+            String letter = hiddenWord.getContent().substring(i, i + 1);
 
             if (guessedLetters.size() > 0) {
 
-                for (String guessedLetter : this.guessedLetters) {
+                for (Character guessedLetter : this.guessedLetters) {
 
-                    if(letter.equals(guessedLetter.trim().toUpperCase())) {
+                    if(letter.charAt(0) == Character.toUpperCase(guessedLetter)) {
                         this.foundLetters.remove(i);
-                        this.foundLetters.add(i, " " + letter + "");
+                        this.foundLetters.add(i, letter);
                     }
                     
                 }
@@ -46,13 +45,34 @@ public class Play {
         }
 
         drawHangman();
+        System.out.println(this.foundLetters.toString());
     }
 
-    private boolean checkLetter(String letter) {
+    public boolean AddGuessedLetters(Character letter)
+        {
+            if (Character.isDigit(letter))  // Check if the letter is a digit
+            {
+                System.out.println("'" + Character.toUpperCase(letter) + "' is not a valid letter");
+                return false;
+            }
+            else if (!this.guessedLetters.contains(Character.toUpperCase(letter))) // Add guessed letter if it not exists
+            {
+                this.guessedLetters.add(Character.toUpperCase(letter));
+                System.out.println("Guessed Letters : " + buildString(guessedLetters, true));
+                return true;
+            }
+            else // letter is exists
+            {
+                System.out.println("Sorry, you already guessed '" + Character.toString(Character.toUpperCase(letter))+ "'");
+            }
+            return false;
+        }
+
+    private boolean checkLetter(Character letter) {
 
         for(int i = 0 ; i < this.hiddenWord.getWordLenght() ; i++) {
-            String splitterLetter = this.hiddenWord.getContent().substring(i, 1).toUpperCase();
-            if(splitterLetter.equals(letter.trim().toUpperCase()))
+            String checkedLetter = this.hiddenWord.getContent().substring(i, i+1).toUpperCase();
+            if(checkedLetter.charAt(0) == (Character.toUpperCase(letter)))
             {
                 return true;
             }
@@ -60,9 +80,23 @@ public class Play {
         return false;
     }
 
+    private String buildString(List<Character> inPutString, Boolean space) //To turn the Characters into Strings
+        {
+           StringBuilder newStr = new StringBuilder();
+           for (Character item : inPutString) {
+               if (space) {
+                   newStr = newStr.append(item.toString().toUpperCase() + " ");
+               }
+               else {
+                   newStr = newStr.append(item.toString().toUpperCase());
+               }
+           }
+           return newStr.toString();
+        }
+
     private void drawHangman() {
         this.wrongLetters = new ArrayList<>();
-        for (String item : guessedLetters) 
+        for (Character item : guessedLetters) 
         {
             if(!checkLetter(item))
             {
@@ -153,6 +187,13 @@ public class Play {
         System.out.println(" ");
         
 
+    }
+
+    public static void main(String[] args) {
+        
+        Play p = new Play();
+        System.out.println(p.hiddenWord.getContent());
+        p.playHangman();
     }
 
 }
