@@ -48,14 +48,14 @@ public class Play {
         System.out.println(this.foundLetters.toString());
     }
 
-    public boolean AddGuessedLetters(Character letter)
+    public boolean addGuessedLetters(Character letter)
         {
-            if (Character.isDigit(letter))  // Check if the letter is a digit
+            if (Character.isDigit(letter))  // Check if the letter is digit
             {
                 System.out.println("'" + Character.toUpperCase(letter) + "' is not a valid letter");
                 return false;
             }
-            else if (!this.guessedLetters.contains(Character.toUpperCase(letter))) // Add guessed letter if it not exists
+            else if (!this.guessedLetters.contains(Character.toUpperCase(letter))) // Add guessed letter if it doesn't exist
             {
                 this.guessedLetters.add(Character.toUpperCase(letter));
                 System.out.println("Guessed Letters : " + buildString(guessedLetters, true));
@@ -191,8 +191,18 @@ public class Play {
 
     public static void main(String[] args) {
         
+        System.out.println("TEST");
+
         Play p = new Play();
+        Words randomWords = new Words();
+        Word randomWord = randomWords.pickWord();
+        p.hiddenWord.setContent(randomWord.getContent());
         System.out.println(p.hiddenWord.getContent());
+
+        p.addGuessedLetters('A');
+        p.addGuessedLetters('A');
+        p.addGuessedLetters('B');
+        p.addGuessedLetters('c');
         p.playHangman();
     }
 
