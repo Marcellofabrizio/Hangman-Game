@@ -12,6 +12,11 @@ public class Play {
     public Words pickedWord = new Words();
     public Word hiddenWord = new Word();
 
+    public boolean CONTINUEGAME = false;
+    public boolean WINGAME = false;
+    public boolean LOSTGAME = false;
+
+
     public Play() {
         this.foundLetters = new ArrayList<>();
         this.wrongLetters = new ArrayList<>();
@@ -50,18 +55,18 @@ public class Play {
 
     public boolean addGuessedLetters(Character letter)
         {
-            if (Character.isDigit(letter))  // Check if the letter is digit
+            if (Character.isDigit(letter))
             {
                 System.out.println("'" + Character.toUpperCase(letter) + "' is not a valid letter");
                 return false;
             }
-            else if (!this.guessedLetters.contains(Character.toUpperCase(letter))) // Add guessed letter if it doesn't exist
+            else if (!this.guessedLetters.contains(Character.toUpperCase(letter)))
             {
                 this.guessedLetters.add(Character.toUpperCase(letter));
                 System.out.println("Guessed Letters : " + buildString(guessedLetters, true));
                 return true;
             }
-            else // letter is exists
+            else
             {
                 System.out.println("Sorry, you already guessed '" + Character.toString(Character.toUpperCase(letter))+ "'");
             }
@@ -80,7 +85,7 @@ public class Play {
         return false;
     }
 
-    private String buildString(List<Character> inPutString, Boolean space) //To turn the Characters into Strings
+    private String buildString(List<Character> inPutString, Boolean space)
         {
            StringBuilder newStr = new StringBuilder();
            for (Character item : inPutString) {
@@ -105,7 +110,18 @@ public class Play {
         }
 
         System.out.println(" ");
-        if(this.wrongLetters.size() == 1) {
+        if(this.wrongLetters.size() == 0) {
+            System.out.println("   _____");
+            System.out.println("  |     |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("  |");
+            System.out.println("__|__");
+        }
+
+        else if(this.wrongLetters.size() == 1) {
             System.out.println("   _____");
             System.out.println("  |     |");
             System.out.println("  |     O");
@@ -186,9 +202,30 @@ public class Play {
 
         System.out.println(" ");
         
-
     }
 
+    public boolean resultsLostGame() {
+        
+        if (this.wrongLetters.size() == 7) {
+            return this.LOSTGAME = true;
+        }
+        return false;
+    }
+
+    public boolean resultsWinGame() {
+        
+        if(this.pickedWord.getContent().toUpperCase().equals(foundLetters.toString().replaceAll(" ","") )) {
+            return this.WINGAME = true;
+        }
+        return false;
+    }
+
+    public boolean resultsContinueGame() {
+        
+        return this.CONTINUEGAME = true;   
+    
+    }
+    
     public static void main(String[] args) {
         
         System.out.println("TEST");
