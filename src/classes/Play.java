@@ -13,8 +13,7 @@ public class Play {
     public Word hiddenWord = new Word();
 
     public boolean CONTINUEGAME = false;
-    public boolean WINGAME = false;
-    public boolean LOSTGAME = false;
+    public boolean WINLOSTGAME;
 
 
     public Play() {
@@ -25,12 +24,14 @@ public class Play {
 
     public void playHangman() {
 
+        foundLetters = new ArrayList<String>();
+
         for (int i = 0; i < hiddenWord.getWordLenght(); i++) {
 
             this.foundLetters.add(" _ ");
         }
 
-        for (int i = 0; i < (hiddenWord.getWordLenght() - 1); i++) {
+        for (int i = 0; i < (hiddenWord.getWordLenght()); i++) {
 
             String letter = hiddenWord.getContent().substring(i, i + 1);
 
@@ -60,16 +61,19 @@ public class Play {
                 System.out.println("'" + Character.toUpperCase(letter) + "' is not a valid letter");
                 return false;
             }
+
             else if (!this.guessedLetters.contains(Character.toUpperCase(letter)))
             {
                 this.guessedLetters.add(Character.toUpperCase(letter));
                 System.out.println("Guessed Letters : " + buildString(guessedLetters, true));
                 return true;
             }
+
             else
             {
                 System.out.println("Sorry, you already guessed '" + Character.toString(Character.toUpperCase(letter))+ "'");
             }
+
             return false;
         }
 
@@ -147,7 +151,6 @@ public class Play {
             System.out.println("   _____");
             System.out.println("  |     |");
             System.out.println("  |     O");
-            System.out.println("  |     |");
             System.out.println("  |    \\|");
             System.out.println("  |");
             System.out.println("  |");
@@ -158,7 +161,6 @@ public class Play {
             System.out.println("   _____");
             System.out.println("  |     |");
             System.out.println("  |     O");
-            System.out.println("  |     |");
             System.out.println("  |    \\|/");
             System.out.println("  |");
             System.out.println("  |");
@@ -169,7 +171,6 @@ public class Play {
             System.out.println("   _____");
             System.out.println("  |     |");
             System.out.println("  |     O");
-            System.out.println("  |     |");
             System.out.println("  |    \\|/");
             System.out.println("  |     |");
             System.out.println("  |");
@@ -180,7 +181,6 @@ public class Play {
             System.out.println("   _____");
             System.out.println("  |     |");
             System.out.println("  |     O");
-            System.out.println("  |     |");
             System.out.println("  |    \\|/");
             System.out.println("  |     |");
             System.out.println("  |    /");
@@ -191,7 +191,6 @@ public class Play {
             System.out.println("   _____");
             System.out.println("  |     |");
             System.out.println("  |     O");
-            System.out.println("  |     |");
             System.out.println("  |    \\|/");
             System.out.println("  |     |");
             System.out.println("  |    / \\");
@@ -204,26 +203,27 @@ public class Play {
         
     }
 
-    public boolean resultsLostGame() {
+    public boolean resultsGame() {
         
+        if (this.pickedWord.getContent().equals(foundLetters.toString().replaceAll(" ","") )) {
+            this.WINLOSTGAME = true;
+        }
+        
+        else if (wrongLetters.size() == 7){
+            this.WINLOSTGAME = false;
+        }
+        
+        return this.WINLOSTGAME;
+    }
+
+    public boolean continueGame() {
+
         if (this.wrongLetters.size() == 7) {
-            return this.LOSTGAME = true;
+            return false;
         }
-        return false;
-    }
 
-    public boolean resultsWinGame() {
-        
-        if(this.pickedWord.getContent().toUpperCase().equals(foundLetters.toString().replaceAll(" ","") )) {
-            return this.WINGAME = true;
-        }
-        return false;
-    }
+        return true;
 
-    public boolean resultsContinueGame() {
-        
-        return this.CONTINUEGAME = true;   
-    
     }
     
     public static void main(String[] args) {

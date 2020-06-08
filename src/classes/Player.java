@@ -5,12 +5,17 @@ public class Player {
     private String name;
     private int score;
 
-    public Player () {
-
+    public Player (String name, int score) {
+        this.name = name;
+        this.score = score;
     }
 
-    public void setScore() {
+    public void setScore(int pointsMade) {
+        this.score += pointsMade;
+    }
 
+    public int getScore() {
+        return this.score;
     }
 
     public String getName() {
