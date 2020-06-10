@@ -92,7 +92,21 @@ public class Play {
     private String buildString(List<Character> inPutString, Boolean space)
         {
            StringBuilder newStr = new StringBuilder();
-           for (Character item : inPutString) {
+           for (Object item : inPutString) {
+               if (space) {
+                   newStr = newStr.append(item.toString().toUpperCase() + " ");
+               }
+               else {
+                   newStr = newStr.append(item.toString().toUpperCase());
+               }
+           }
+           return newStr.toString();
+        }
+
+    private String buildStringForFoundLetters(List<String> inPutString, Boolean space)
+        {
+           StringBuilder newStr = new StringBuilder();
+           for (Object item : inPutString) {
                if (space) {
                    newStr = newStr.append(item.toString().toUpperCase() + " ");
                }
@@ -205,11 +219,11 @@ public class Play {
 
     public boolean resultsGame() {
         
-        if (this.pickedWord.getContent().equals(foundLetters.toString().replaceAll(" ","") )) {
+        if (this.hiddenWord.getContent().equals(this.buildStringForFoundLetters(this.foundLetters, false).replace(" ",""))) {
             this.WINLOSTGAME = true;
         }
         
-        else if (wrongLetters.size() == 7){
+        if (wrongLetters.size() == 7){
             this.WINLOSTGAME = false;
         }
         
@@ -222,25 +236,32 @@ public class Play {
             return false;
         }
 
+        else if (this.hiddenWord.getContent().equals(this.buildStringForFoundLetters(this.foundLetters, false).replace(" ",""))) {
+            return false;
+        }
+
         return true;
 
     }
     
     public static void main(String[] args) {
         
-        System.out.println("TEST");
+        System.out.println("TESTS");
 
-        Play p = new Play();
-        Words randomWords = new Words();
+        Play test = new Play();
+        Themes theme = new Themes();
+        Words randomWords = theme.pickRandomTheme();
         Word randomWord = randomWords.pickWord();
-        p.hiddenWord.setContent(randomWord.getContent());
-        System.out.println(p.hiddenWord.getContent());
+        test.hiddenWord.setContent(randomWord.getContent());
+        System.out.println(test.hiddenWord.getContent());
 
-        p.addGuessedLetters('A');
-        p.addGuessedLetters('A');
-        p.addGuessedLetters('B');
-        p.addGuessedLetters('c');
-        p.playHangman();
+        test.addGuessedLetters('A');
+        test.addGuessedLetters('D');
+        test.addGuessedLetters('B');
+        test.addGuessedLetters('c');
+        test.playHangman();
+        System.out.println(test.buildStringForFoundLetters(test.foundLetters, false));
+        System.out.println(randomWord.getContent().equals(test.buildStringForFoundLetters(test.foundLetters, false).replace(" ","")));
     }
 
 }

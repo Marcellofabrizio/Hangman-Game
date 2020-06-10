@@ -16,7 +16,7 @@ public class Main {
     public static String execute() {
         Scanner in = new Scanner(System.in);
 
-        String yesNo = "";
+        String yesNo = "N";
         Words words = new Words();
         Word pickeWord = words.pickWord();
         Play play = new Play();
@@ -34,9 +34,11 @@ public class Main {
             Character guessedLetter = in.next().charAt(0);
             if (play.addGuessedLetters(guessedLetter)) {
                 play.playHangman();
+                System.out.println(play.hiddenWord.getContent());
             }
 
             play.CONTINUEGAME = play.continueGame();
+
         }
 
         if (play.resultsGame() == false) {
@@ -46,13 +48,16 @@ public class Main {
             yesNo = in.next();
         }
 
-        else if(play.resultsGame() == true) {
+        if(play.resultsGame() == true) {
             System.out.println("You won!");
             System.out.println("The hidden word was -> " + play.hiddenWord.getContent());
             System.out.println("Do you want to play again? Y/N");
             yesNo = in.next();
+            return yesNo.toUpperCase();
         }
+
         return yesNo.toUpperCase();
+        
     }
 
 }
