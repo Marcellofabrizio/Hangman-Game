@@ -3,6 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Themes  {
     
@@ -56,6 +57,32 @@ public class Themes  {
         return theme.getPlacesTheme();
     }
 
+    public void addNewWordToTheme() {
+        System.out.println("DO YOU WISH TO ADD A NEW WORD FOR THE FOLLOWING THEMES?");
+        System.out.println("1 ---- CITIES OF THE WORLD");
+        System.out.println("2 ---- COMPUTER AND PROGRAMMING TERMS");
+        System.out.println("3 ---- CONTINUE WITHOUT NEW WORD");
+        Scanner in = new Scanner(System.in);
+        int option = in.nextInt();
+        
+        switch(option) {
+            case 1: {
+                String newWord = in.next();
+                this.placesThemeList.addWord(newWord.toUpperCase());
+                break;
+            }
+
+            case 2: {
+                String newWord = in.next();
+                this.computerThemeList.addWord(newWord.toUpperCase());
+                break;
+            }
+
+            case 3: {
+                break;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         Themes theme = new Themes();

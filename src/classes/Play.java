@@ -243,6 +243,10 @@ public class Play {
         return true;
 
     }
+
+    public String getFoundLetters() {
+        return this.buildStringForFoundLetters(this.foundLetters, false).replace(" ","");
+    }
     
     public static void main(String[] args) {
         
