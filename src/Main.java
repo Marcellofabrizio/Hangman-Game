@@ -10,7 +10,7 @@ public class Main {
     static Players playersList = new Players();
     public static void main(String[] args) {
         System.out.println("THE WORDS ARE GENERATED BASED ON TWO RANDOM THEMES: \n"
-                            + "CITIES OF THE WORLD, AND COMPUTER AND PROGRAMING TERMS\n"
+                            + "CITIES OF THE WORLD, AND COMPUTER AND PROGRAMMING TERMS\n"
                             + "THERE CAN BE MORE THAN ONE WORD PER PLAY\n\n"
                             + "YOUR SCORE 100 POINTS IF YOU CORRECTLY GUESS THE WORD\n"
                             + "AND 15 POINT FOR EACH HIDDEN SLOT LEFT\n"
@@ -39,17 +39,16 @@ public class Main {
         System.out.println("\n");
         play.CONTINUEGAME = true;
 
-        System.out.println("TELL ME YOUR NAME, PLAYER!\n");
+        System.out.println("Tell me your name, player!\n");
         String currentPlayerName = in.next();
         Player currentPlayer = new Player(currentPlayerName);
-        System.out.println("WELCOME, " + currentPlayerName);
+        System.out.println("Welcome, " + currentPlayerName.toUpperCase());
 
         while (play.CONTINUEGAME == true) {
             System.out.println("Enter a letter => \n");
             Character guessedLetter = in.next().charAt(0);
             if (play.addGuessedLetters(guessedLetter)) {
                 play.playHangman();
-                //System.out.println(play.hiddenWord.getContent());
             }
 
             play.CONTINUEGAME = play.continueGame();

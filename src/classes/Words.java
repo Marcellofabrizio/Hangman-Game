@@ -66,25 +66,4 @@ public class Words extends Word {
         return word1;
     }
 
-    public static void main(String[] args) {
-        
-        System.out.println("MULTIPLE-WORDS-TEST");
-        Themes theme = new Themes();
-        Words words = theme.pickRandomTheme();
-        Word wordWithSelector1;
-        Word wordWithSelector2;
-        Word wordWithSelector3;
-        
-        System.out.println("SELECTOR = 1 ------> ");
-        wordWithSelector1 = words.addMultipleWords(1);
-        System.out.println(wordWithSelector1.getContent() + "\n");
-
-        System.out.println("SELECTOR = 2 ------> ");
-        wordWithSelector2 = words.addMultipleWords(2);
-        System.out.println(wordWithSelector2.getContent() + "\n");
-
-        System.out.println("SELECTOR = 3 ------> ");
-        wordWithSelector3 = words.addMultipleWords(3);
-        System.out.println(wordWithSelector3.getContent() + "\n");
-    }
 }

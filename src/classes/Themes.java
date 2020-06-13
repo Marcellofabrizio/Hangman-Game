@@ -84,10 +84,5 @@ public class Themes  {
         }
     }
 
-    public static void main(String[] args) {
-        Themes theme = new Themes();
-        Words selectedTheme = theme.pickRandomTheme();
-        Word pickedWord = selectedTheme.pickWord();
-        System.out.println(pickedWord.getContent());
-    }
+    
 }

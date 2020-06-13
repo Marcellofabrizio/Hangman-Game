@@ -248,24 +248,5 @@ public class Play {
         return this.buildStringForFoundLetters(this.foundLetters, false).replace(" ","");
     }
     
-    public static void main(String[] args) {
-        
-        System.out.println("TESTS");
-
-        Play test = new Play();
-        Themes theme = new Themes();
-        Words randomWords = theme.pickRandomTheme();
-        Word randomWord = randomWords.pickWord();
-        test.hiddenWord.setContent(randomWord.getContent());
-        System.out.println(test.hiddenWord.getContent());
-
-        test.addGuessedLetters('A');
-        test.addGuessedLetters('D');
-        test.addGuessedLetters('B');
-        test.addGuessedLetters('c');
-        test.playHangman();
-        System.out.println(test.buildStringForFoundLetters(test.foundLetters, false));
-        System.out.println(randomWord.getContent().equals(test.buildStringForFoundLetters(test.foundLetters, false).replace(" ","")));
-    }
 
 }
