@@ -18,10 +18,11 @@ public class Players {
     }
 
     public void printPlayersList() {
+        System.out.print("\033[H\033[2J");
         System.out.println("--------TOP PLAYERS--------");
         for (Player player : players) {
-            System.out.println("NAME -> " + player.getName().toUpperCase() + " " + 
-                                "SCORE -> " + player.getScore());
+            System.out.println("NOME -> " + player.getName().toUpperCase() + " " + 
+                                "PONTOS -> " + player.getScore());
         }
         System.out.println("---------------------------");
     }

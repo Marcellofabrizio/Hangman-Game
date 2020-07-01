@@ -58,20 +58,21 @@ public class Play {
         {
             if (Character.isDigit(letter))
             {
-                System.out.println("'" + Character.toUpperCase(letter) + "' is not a valid letter");
+                System.out.println("'" + Character.toUpperCase(letter) + "' nao e uma letra valida");
                 return false;
             }
 
             else if (!this.guessedLetters.contains(Character.toUpperCase(letter)))
             {
                 this.guessedLetters.add(Character.toUpperCase(letter));
-                System.out.println("Guessed Letters : " + buildString(guessedLetters, true));
+                System.out.print("\033[H\033[2J");
+                System.out.println("Letras Adivinhadas : " + buildString(guessedLetters, true));
                 return true;
             }
 
             else
             {
-                System.out.println("Sorry, you already guessed '" + Character.toString(Character.toUpperCase(letter))+ "'");
+                System.out.println("Desculpe, voce ja adivinhou essa letra '" + Character.toString(Character.toUpperCase(letter))+ "'");
             }
 
             return false;
@@ -128,6 +129,7 @@ public class Play {
         }
 
         System.out.println(" ");
+        
         if(this.wrongLetters.size() == 0) {
             System.out.println("   _____");
             System.out.println("  |     |");

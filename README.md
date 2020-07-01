@@ -1,1 +1,3 @@
-Implementation of the Hangman game in Java for the second OOP assignment 
+Rodar o programa: 
+$ javac Main.java
+$ java Main

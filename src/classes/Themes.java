@@ -51,17 +51,28 @@ public class Themes  {
         int selector = random.nextInt(2);
         Themes theme = new Themes();
         if (selector == 0) {
+            printRandomThemeName(selector);
             return theme.getComputerTheme();
         }
 
+        printRandomThemeName(selector);
         return theme.getPlacesTheme();
     }
 
+    public static void printRandomThemeName(int selector) {
+        if (selector == 0) {
+            System.out.println("O tema é TERMOS DE COMPUTAÇÃO E PROGRAMAÇÃO");
+        }
+        else if (selector ==1){
+        System.out.println("O tema é CIDADES DO MUNDO");
+        }
+    }
+
     public void addNewWordToTheme() {
-        System.out.println("DO YOU WISH TO ADD A NEW WORD FOR THE FOLLOWING THEMES?");
-        System.out.println("1 ---- CITIES OF THE WORLD");
-        System.out.println("2 ---- COMPUTER AND PROGRAMMING TERMS");
-        System.out.println("3 ---- CONTINUE WITHOUT NEW WORD");
+        System.out.println("VOCÊ DESEJA ADICIONAR UMA PALAVRA NOVA PARA OS SEGUINTES TEMAS?");
+        System.out.println("1 ---- CIDADES DO MUNDO");
+        System.out.println("2 ---- TERMOS DE COMPUTAÇÃO E PROGRAMAÇÃO");
+        System.out.println("3 ---- CONTINUAR SEM PALAVRA NOVA");
         Scanner in = new Scanner(System.in);
         int option = in.nextInt();
         

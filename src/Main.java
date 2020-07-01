@@ -4,19 +4,21 @@ import classes.Players;
 import classes.Themes;
 import classes.Word;
 import classes.Words;
+
 import java.util.Scanner;
 public class Main {
     
     static Players playersList = new Players();
     public static void main(String[] args) {
-        System.out.println("THE WORDS ARE GENERATED BASED ON TWO RANDOM THEMES: \n"
-                            + "CITIES OF THE WORLD, AND COMPUTER AND PROGRAMMING TERMS\n"
-                            + "THERE CAN BE MORE THAN ONE WORD PER PLAY\n\n"
-                            + "YOUR SCORE 100 POINTS IF YOU CORRECTLY GUESS THE WORD\n"
-                            + "AND 15 POINT FOR EACH HIDDEN SLOT LEFT\n"
-                            + "YOU CAN ONLY GUESS ONE LETTER AT A TIME\n");
-        System.out.println("ATENTION!!!\n" 
-                            + "FOR SPACES USE -\n");
+        System.out.print("\033[H\033[2J");
+        System.out.println("AS PALAVRAS SÃO GERADAS COM BASE EM DOIS TEMAS ALEATÓRIOS: \n"
+                            + "CIDADES DO MUNDO E TERMOS DE COMPUTAÇÃO E PROGRAMAÇÃO.\n"
+                            + "PODE HAVER MAIS DE UMA PALAVRA POR JOGADA.\n\n"
+                            + "VOCÊ GANHA 100 PONTOS SE ACERTAR UMA PALAVRA CORRETAMENTE,\n"
+                            + "E 15 PONTOS POR CADA CAMPO ENCOBERTO.\n"
+                            + "VOCÊ SÓ PODE CHUTAR UMA LETRA POR VEZ.\n");
+        System.out.println("ATENÇÃO!!!\n" 
+                            + "PARA ESPAÇOS USE -\n");
 
         String yesNo = ""; 
         do 
@@ -30,22 +32,24 @@ public class Main {
 
         String yesNo = "N";
         Themes theme = new Themes();
-        Words words = theme.pickRandomTheme();
-        int selector = words.chooseMultipleWords();
-        Word pickeWord = words.addMultipleWords(selector);
         Play play = new Play();
-        play.hiddenWord.setContent(pickeWord.getContent());
 
         System.out.println("\n");
         play.CONTINUEGAME = true;
 
-        System.out.println("Tell me your name, player!\n");
-        String currentPlayerName = in.next();
+        System.out.println("Diga-me o seu nome, jogador!\n");
+        String currentPlayerName = in.nextLine();
         Player currentPlayer = new Player(currentPlayerName);
-        System.out.println("Welcome, " + currentPlayerName.toUpperCase());
+        System.out.print("\033[H\033[2J");
+        System.out.println("Bem vindo, " + currentPlayerName.toUpperCase());
+
+        Words words = theme.pickRandomTheme();
+        int selector = words.chooseMultipleWords();
+        Word pickeWord = words.addMultipleWords(selector);
+        play.hiddenWord.setContent(pickeWord.getContent());
 
         while (play.CONTINUEGAME == true) {
-            System.out.println("Enter a letter => \n");
+            System.out.println("Digite uma letra => \n");
             Character guessedLetter = in.next().charAt(0);
             if (play.addGuessedLetters(guessedLetter)) {
                 play.playHangman();
@@ -56,9 +60,9 @@ public class Main {
         }
 
         if (play.resultsGame() == false) {
-            System.out.println("Sorry, you lost");
-            System.out.println("The hidden word was -> " + play.hiddenWord.getContent());
-            System.out.println("Do you want to play again? Y/N");
+            System.out.println("Desculpe, você perdeu");
+            System.out.println("A palavra escondida era -> " + play.hiddenWord.getContent());
+            System.out.println("Você quer jogar de novo? Y/N");
             int score = currentPlayer.getScoreFromResult(play.getFoundLetters());
             currentPlayer.setScore(score);
             yesNo = in.next();
@@ -67,9 +71,9 @@ public class Main {
         }
 
         if(play.resultsGame() == true) {
-            System.out.println("You won!");
-            System.out.println("The hidden word was -> " + play.hiddenWord.getContent());
-            System.out.println("Do you want to play again? Y/N");
+            System.out.println("Você venceu!");
+            System.out.println("A palavra escondida era -> " + play.hiddenWord.getContent());
+            System.out.println("Você quer jogar de novo? Y/N");
             currentPlayer.setScore(100);
             yesNo = in.next();
             playersList.addPlayer(currentPlayer.getName(), currentPlayer.getScore());
