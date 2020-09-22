@@ -1,10 +1,3 @@
-import classes.Play;
-import classes.Player;
-import classes.Players;
-import classes.Themes;
-import classes.Word;
-import classes.Words;
-
 import java.util.Scanner;
 public class Main {
     
