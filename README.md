@@ -1,5 +1,4 @@
-Rodar o programa:
+To run the game:
 <br> 
-$ javac -d classes app/Main.java
+$ java -jar src/hangman.jar
 <br>
-$ java -cp classes app.Main
